@@ -16,10 +16,14 @@ public interface IChatService
 public class ChatService : IChatService
 {
     private readonly AppDbContext _db;
-    public ChatService(AppDbContext db)
+    private readonly  ILogger<ChatService> _logger;
+    public ChatService(AppDbContext db, ILogger<ChatService> logger)
     {
         _db = db;
+        _logger= logger;
     }
+    
+    
     public List<ClientDto> GetChats()
     {
         var chats = _db.Chats.Select(g => new ClientDto
